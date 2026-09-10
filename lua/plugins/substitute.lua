@@ -12,6 +12,7 @@ return {
       function()
         require("substitute").operator()
       end,
+      mode = "n",
       desc = "Substitute with motion",
     },
     {
