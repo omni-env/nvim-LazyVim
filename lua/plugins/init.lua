@@ -1,6 +1,4 @@
 return {
-  { "folke/todo-comments.nvim", enabled = false },
-
   {
     "keaising/im-select.nvim",
     event = "InsertEnter",

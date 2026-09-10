@@ -10,16 +10,17 @@ return {
     {
       "rainzm/flash-zh.nvim",
       dependencies = "folke/flash.nvim",
+      event = "VeryLazy",
       keys = {
         {
           "s",
           function()
-            require("flash-zh").jump({
+            require("flash-zh").jump {
               chinese_only = false,
-            })
+            }
           end,
           mode = { "n", "x", "o" },
-          desc = "Flash between Chinese",
+          desc = "Flash with Chinese support",
         },
       },
     },

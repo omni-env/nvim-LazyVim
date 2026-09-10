@@ -12,3 +12,6 @@ vim.opt.listchars = {
   trail = "·", -- 显示行尾空格为 ·
   nbsp = "␣", -- 显示不间断空格为 ␣
 }
+
+-- 问题排查
+-- vim.lsp.log.set_level "debug"
