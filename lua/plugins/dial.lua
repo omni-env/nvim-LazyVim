@@ -11,7 +11,7 @@ return {
 
   -- opts 函数的第二个参数 (opts) 包含了 LazyVim 预设好的完整默认配置
   opts = function(_, opts)
-    local augend = require("dial.augend")
+    local augend = require "dial.augend"
 
     -- 防御性声明：确保 default 组表结构存在，避免 nil 错误
     opts.groups.default = opts.groups.default or {}
@@ -19,10 +19,10 @@ return {
     -- 使用 vim.list_extend 批量追加自定义规则，完美保留 LazyVim 的底层预设
     vim.list_extend(opts.groups.default, {
       augend.date.alias["%Y-%m-%d"], -- 日期格式 (如 2026-08-12)
-      augend.case.new({
+      augend.case.new {
         types = { "camelCase", "snake_case", "PascalCase", "SCREAMING_SNAKE_CASE" },
         cyclic = true,
-      }),
+      },
     })
 
     -- 原位修改 (Mutate) 传入的 opts 表即可，无须 return 新表

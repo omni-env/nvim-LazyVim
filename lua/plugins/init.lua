@@ -14,4 +14,12 @@ return {
     version = "^4.0.0",
     event = { "BufReadPost", "BufNewFile" },
   },
+
+  {
+    "chentoast/marks.nvim",
+    event = "VeryLazy",
+    opts = {
+      refresh_interval = 250,
+    },
+  },
 }

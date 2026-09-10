@@ -4,6 +4,11 @@ return {
     opts = {
       ensure_installed = {
         "powershell",
+        "jsonnet",
+      },
+      indent = {
+        -- Nushell 语言服务支持不完善，缩进问题较多，这里针对 nu 禁用 Treesitter 缩进
+        disable = { "nu" },
       },
     },
   },

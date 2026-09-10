@@ -23,8 +23,29 @@ kmap("n", "<leader>P", function()
 end, { desc = "Paste clipboard above (line-wise, adjust indent)" })
 
 -- 按 Shift+Insert 粘贴系统剪贴板内容
-kmap({ "n", "v" }, "<S-Insert>", '"+p', { desc = "Paste OS clipboard" })
-kmap({ "i", "c" }, "<S-Insert>", "<C-r>+", { desc = "Paste OS clipboard" })
+kmap({ "n", "v" }, "<S-Insert>", '"+p', { desc = "Paste OS clipboard in normal and visual mode" })
+kmap("i", "<S-Insert>", "<C-r><C-p>+", { desc = "Paste OS clipboard in insert mode" })
+-- 命令行模式: 仅粘贴首行
+-- 由于 Neovim 在 cmdline 模式下的一个已知显示刷新问题，
+-- 如果简单使用 `<C-r>+` 的话，粘贴的内容不能及时在 UI 上显示出来
+kmap("c", "<S-Insert>", function()
+  -- 获取系统剪贴板（+ 寄存器）内容
+  local raw_clipboard = vim.fn.getreg "+"
+  -- 确保拿到的是 string 类型
+  if type(raw_clipboard) ~= "string" or raw_clipboard == "" then
+    return
+  end
+  -- 截取首行
+  local first_line_text = string.match(raw_clipboard, "^[^\r\n]*") or ""
+  if first_line_text == "" then
+    return
+  end
+  -- vim.api.nvim_paste(data, crlf, phase)
+  --   data  : 要粘贴的目标文本字符串。
+  --   crlf  : 为 true 时自动将 \r\n 或 \r 统一转换为 \n，false 则原样保留不作转换。
+  --   phase : -1 表示一次性全部粘贴，1、2、3 分别用于超大文本分块流式粘贴的开始、继续和结束阶段。
+  vim.api.nvim_paste(first_line_text, false, -1)
+end, { desc = "Paste first line of OS clipboard in command line" })
 
 -- 对比当前文件与剪切板
 local function diff_with_clipboard()
@@ -77,5 +98,5 @@ local function diff_with_clipboard()
 end
 
 -- 绑定快捷键，<leader>dc (Diff Clipboard)
-vim.keymap.set("n", "<leader>dc", diff_with_clipboard, { desc = "Diff with clipboard" })
-vim.keymap.set("n", "<leader>do", "<cmd>diffoff!<CR>", { desc = "Turn off Diff mode" })
+kmap("n", "<leader>dc", diff_with_clipboard, { desc = "Diff with clipboard" })
+kmap("n", "<leader>do", "<cmd>diffoff!<CR>", { desc = "Turn off Diff mode" })
