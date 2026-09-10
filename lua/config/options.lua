@@ -4,6 +4,8 @@
 
 -- 优先使用 unix，其次支持 dos 和 macunix
 vim.opt.fileformats = "unix,dos,mac"
+vim.opt.scrolloff = 2 -- 滚动时保持光标上下至少保留 2 行上下文
+vim.opt.sidescrolloff = 8 -- 左右平移时保留 8 列上下文
 
 -- 显示空格、制表符等不可见字符
 vim.opt.list = true
