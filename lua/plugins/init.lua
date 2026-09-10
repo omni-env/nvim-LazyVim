@@ -1,4 +1,6 @@
 return {
+  { "MagicDuck/grug-far.nvim", enabled = false },
+
   {
     "keaising/im-select.nvim",
     event = "InsertEnter",
