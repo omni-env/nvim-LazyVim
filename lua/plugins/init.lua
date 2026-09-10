@@ -1,9 +1,11 @@
 return {
+  { "folke/todo-comments.nvim", enabled = false },
+
   {
     "keaising/im-select.nvim",
     event = "InsertEnter",
     config = function()
-      require("im_select").setup({})
+      require("im_select").setup {}
     end,
   },
 

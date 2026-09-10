@@ -1,5 +1,6 @@
 return {
-  { "kepano/flexoki-neovim", name = "flexoki", lazy = false },
+  { "kepano/flexoki-neovim", name = "flexoki", lazy = true },
+  { "folke/tokyonight.nvim", enabled = false },
   {
     "LazyVim/LazyVim",
     opts = {
@@ -19,7 +20,7 @@ return {
         -- 当系统切换为暗色主题时执行的操作
         vim.api.nvim_set_option_value("background", "dark", {})
         -- LazyVim 默认使用 tokyonight，你可以根据需要切换为你安装的主题
-        vim.cmd("colorscheme catppuccin-mocha")
+        vim.cmd "colorscheme catppuccin-mocha"
       end,
       set_light_mode = function()
         -- 当前已经是亮色色主题则不需修改直接返回
@@ -29,7 +30,7 @@ return {
         -- 当系统切换为亮色主题时执行的操作
         vim.api.nvim_set_option_value("background", "light", {})
         -- 切换为亮色版本的主题
-        vim.cmd("colorscheme flexoki-light")
+        vim.cmd "colorscheme flexoki-light"
       end,
     },
   },
