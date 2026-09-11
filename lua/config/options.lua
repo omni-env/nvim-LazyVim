@@ -10,8 +10,10 @@ vim.opt.sidescrolloff = 8 -- 左右平移时保留 8 列上下文
 vim.opt.fileformats = "unix,dos,mac" -- 优先使用 unix，其次支持 dos 和 macunix
 vim.opt.timeoutlen = 666 -- 设置组合快捷键的等待超时时间
 
--- 显示空格、制表符等不可见字符
-vim.opt.list = true
+-- ===================================================================
+-- 不可见字符显示设置
+-- ===================================================================
+vim.opt.list = true -- 显示空格、制表符等不可见字符
 vim.opt.listchars = {
   -- tab = "» ", -- 显示制表符为 » 后跟一个空格
   tab = "··»", -- 避开与 snacks.nvim 缩进指示线的冲突
@@ -53,3 +55,15 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.softtabstop = 2
   end,
 })
+
+-- ==========================================
+-- 动态 Shell 配置初始化
+-- ==========================================
+-- 引入自定义的工具模块并执行 setup 函数
+local shell_status, shell_util = pcall(require, "utils.shell")
+if shell_status then
+  shell_util.setup()
+else
+  -- 如果因为拼写等问题导致加载失败，能在终端给出一个优雅的警告提示
+  vim.notify("Failed to load shell configuration module.", vim.log.levels.WARN)
+end

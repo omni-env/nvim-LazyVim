@@ -3,7 +3,7 @@
 -- Add any additional keymaps here
 
 -- 导入键映射函数
-local kmap = require("utils").kmap
+local kmap = require("utils.helper").kmap
 
 -- kmap({'n', 'v'}, ';', ':', { desc = 'CMD enter command mode' })
 kmap("i", "jj", "<ESC>", { desc = "Exit insert mode" })
